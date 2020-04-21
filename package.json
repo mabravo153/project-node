@@ -1,0 +1,20 @@
+{
+  "name": "projectnode",
+  "version": "1.0.0",
+  "description": "REST API WITH NODE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "start": "nodemon app.js"
+  },
+  "author": "mabravo153",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}

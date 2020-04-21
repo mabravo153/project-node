@@ -1,7 +1,0 @@
-Para importar los datos de los libros 
-
-debemos asegurarnos que estan activos. ahora bien 
-
-luego de eso debemos ejecutar 
-
-mongo bookAPI < booksJson.js

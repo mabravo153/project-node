@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1/booksAPI',{useNewUrlParser: true})
 
@@ -6,6 +7,8 @@ const server = express();
 const booksRouter = express.Router();
 
 
+server.use(bodyParser.urlencoded({extended: false}))
+server.use(bodyParser.json())
 const books = require('./models/booksModel');
 const port = 9000;
 
@@ -26,8 +29,27 @@ booksRouter.route('/books')
                     msg: respon
                 }
             }
-            return res.json(data)
+            return res.status(data['code']).json(data)
         })
+    })
+    .post( async (req, res) => {
+        let data;
+        try{
+            const libros = new books(req.body)//nos crea el modelo pero no lo guarda
+            await libros.save()
+
+            data = {
+                code: 200,
+                msg: 'correct'
+            }
+
+        }catch(err){
+            data = {
+                code: 400,
+                msg: err
+            }
+        }
+        return res.status(data['code']).json(data)
     })
     
 
@@ -55,7 +77,7 @@ booksRouter.route('/book')
                     }
                 }
             }
-            return res.json(data)
+            return res.status(data['code']).json(data)
 
         })
     })
@@ -80,19 +102,17 @@ booksRouter.route('/book/:bookId')
                         code: 200,
                         msg: respon
                     }
-
-                    res.statusCode = 200
                 }else{
                     data = {
                         code: 404,
                         msg: 'object not found'
                     }
-                    res.statusCode = 404
                 }
             }
-            return res.json(data)
+            return res.status(data['code']).json(data)
         })
     })
+
 
  
 

@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1/booksAPI',{useNewUrlParser: true})
 
 const server = express();
-const books = require('./models/booksModel');
-const booksRouter = require('./routes/booksRouter')(books);
+const Books = require('./models/booksModel');
+const booksRouter = require('./routes/booksRouter')(Books);
 
 
 server.use(bodyParser.urlencoded({extended: false}))
